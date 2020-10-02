@@ -1,0 +1,20 @@
+{
+  "name": "latevenom",
+  "version": "1.0.0",
+  "description": "Mern tech stack aimed to create a login authentication, registration page with legitimite authentication methods and db for data storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/winstoncwang/LateVenom.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/winstoncwang/LateVenom/issues"
+  },
+  "homepage": "https://github.com/winstoncwang/LateVenom#readme"
+}
