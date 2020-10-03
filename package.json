@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/winstoncwang/LateVenom/issues"
   },
-  "homepage": "https://github.com/winstoncwang/LateVenom#readme"
+  "homepage": "https://github.com/winstoncwang/LateVenom#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3",
+    "sinon": "^7.5.0",
+    "sinon-mongoose": "^2.3.0"
+  }
 }
