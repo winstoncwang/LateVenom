@@ -1,14 +1,21 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const { signUpEmail, signUpPhoneNumber } = require("./validators");
+
 const usersSchema = new Schema({
   username: {
     type: String,
-    minlength: 1,
     trim: true,
     unique: true,
+    validate: {
+      validator: (str) => {
+        return /^[a-zA-z0-9_]{3,}$/.test(str);
+      },
+      message:
+        "Username should be longer than 3 letters or numbers including _",
+    }, //required a validator,
     required: [true, "Username is required"],
-    validate, //required a validator,
   },
   password: { type: String, required: [true, "A valid password is required"] },
   firstname: { type: String, minlength: 1, required: true },
@@ -18,10 +25,26 @@ const usersSchema = new Schema({
     trim: true,
     required: [true, "A valid email is required"],
     enum: ["@"],
-    validate,
+    validate: signUpEmail,
   },
-  address: { type: String, trim: true, required: true },
-  phonenumber: { type: Number, trime: true, required: true, min: 10, validate },
+  address: {
+    type: String,
+    trim: true,
+    validate: {
+      validator: (str) => {
+        return /^[a-zA-Z0-9,]$/.test(str);
+      },
+      message: "Please enter a valid address",
+    },
+    required: true,
+  },
+  phonenumber: {
+    type: Number,
+    trim: true,
+    required: true,
+    min: 10,
+    validate: signUpPhoneNumber,
+  },
   accountcreated: { type: Date, default: Date.now() },
   accountupdated: { type: Date, default: Date.now() },
 });
