@@ -9,24 +9,20 @@ const Header = () => {
           HOMEPAGE
         </Link>
 
-        <Link to="/" className="text-white item">
-          CONTACT
-        </Link>
-
         <Link
-          to="/"
+          to="/login"
           className="text-white ui inverted white basic button item"
           style={{ fontSize: "10px" }}
         >
-          SIGNIN
+          LOG IN
         </Link>
 
         <Link
-          to="/"
+          to="/register"
           className="text-white ui inverted white basic button item"
           style={{ fontSize: "10px" }}
         >
-          CREATE ACCOUNT
+          REGISTER
         </Link>
       </div>
     </div>

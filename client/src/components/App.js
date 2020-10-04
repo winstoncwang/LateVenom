@@ -4,17 +4,21 @@ import "./stylesheet/App.css";
 
 //components
 import Header from "./Header";
-import Contents from "./contents/Contents.js";
 import Footer from "./Footer";
+import Contents from "./contents/Contents";
+import LogInForm from "./authentications/LogInForm";
 import history from "../history";
 
 const App = () => {
   return (
     <div className="ui">
       <Router history={history}>
+        {" "}
+        {/* use history @4.10.1 of 04/10/2020 the bug of v5 will not route properly */}
         <div>
           <Header />
-          <Route path="/" exact component={Contents} />
+          <Route exact path="/" component={Contents} />
+          <Route exact path="/login" component={LogInForm} />
           <Footer />
         </div>
       </Router>
