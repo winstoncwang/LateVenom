@@ -1,0 +1,33 @@
+.header-blue {
+  background-color: #2699fb !important;
+  position: fixed;
+  top: 0;
+  left: 0px;
+  width: 100%;
+  margin: 0px !important;
+  z-index: -1;
+}
+
+.footer-blue {
+  background-color: #2699fb !important;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  font-size: 10px;
+  color: white;
+  z-index: -1;
+}
+
+.text-white {
+  color: white !important;
+}
+
+.text-white:focus {
+  color: black !important;
+  background-color: white !important;
+}
+
+.main {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
