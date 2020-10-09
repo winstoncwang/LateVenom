@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Users = require("../model/users.model");
+var sanitize = require("mongo-sanitize");
 
 cleanBody = (req, res, next) => {
   req.body = sanitize(req.body);

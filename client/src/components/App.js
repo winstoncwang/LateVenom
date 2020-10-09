@@ -6,9 +6,9 @@ import "./stylesheet/App.css";
 import Header from "./Header";
 import Footer from "./Footer";
 import Contents from "./contents/Contents";
-import LogInForm from "./authentications/LogInForm";
+import LogInForm from "./userAuth/LogInForm";
+import NewUserForm from "./userAuth/NewUserForm";
 import history from "../history";
-
 const App = () => {
   return (
     <div className="ui">
@@ -19,6 +19,7 @@ const App = () => {
           <Header />
           <Route exact path="/" component={Contents} />
           <Route exact path="/login" component={LogInForm} />
+          <Route exact path="/users" component={NewUserForm} />
           <Footer />
         </div>
       </Router>

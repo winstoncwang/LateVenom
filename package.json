@@ -4,6 +4,7 @@
   "description": "Mern tech stack aimed to create a login authentication, registration page with legitimite authentication methods and db for data storage",
   "main": "index.js",
   "scripts": {
+    "start": "cd ./api-backend && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,10 +19,6 @@
   },
   "homepage": "https://github.com/winstoncwang/LateVenom#readme",
   "dependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^8.1.3",
-    "mongo-sanitize": "^1.1.0",
-    "sinon": "^7.5.0",
-    "sinon-mongoose": "^2.3.0"
+    "mongo-sanitize": "^1.1.0"
   }
 }
