@@ -8,8 +8,6 @@ cleanBody = (req, res, next) => {
   next();
 };
 
-const Users = require("../model/users.model");
-
 //login
 router.post("/users", cleanBody, async (req, res) => {
   try {

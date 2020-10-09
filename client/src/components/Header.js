@@ -18,7 +18,7 @@ const Header = () => {
         </Link>
 
         <Link
-          to="/register"
+          to="/users"
           className="text-white ui inverted white basic button item"
           style={{ fontSize: "10px" }}
         >

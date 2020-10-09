@@ -4,7 +4,9 @@
   "description": "Mern tech stack aimed to create a login authentication, registration page with legitimite authentication methods and db for data storage",
   "main": "index.js",
   "scripts": {
-    "start": "cd ./api-backend && node server.js",
+    "start": "concurrently \"npm run server\" \"npm run client\" ",
+    "server": "cd api-backend && npm start",
+    "client": "cd client && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +20,5 @@
     "url": "https://github.com/winstoncwang/LateVenom/issues"
   },
   "homepage": "https://github.com/winstoncwang/LateVenom#readme",
-  "dependencies": {
-    "mongo-sanitize": "^1.1.0"
-  }
+  "dependencies": {}
 }

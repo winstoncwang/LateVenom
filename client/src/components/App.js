@@ -13,7 +13,6 @@ const App = () => {
   return (
     <div className="ui">
       <Router history={history}>
-        {" "}
         {/* use history @4.10.1 of 04/10/2020 the bug of v5 will not route properly */}
         <div>
           <Header />
