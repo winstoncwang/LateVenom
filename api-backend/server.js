@@ -18,7 +18,7 @@ const options = {
   useCreateIndex: true,
   useUnifiedTopology: true,
 };
-mongoose.connection.connect(process.env.DB_URL, options);
+mongoose.connect(process.env.DB_URL, options);
 mongoose.connection.on("error", () => {
   console.log("connection error");
 });
