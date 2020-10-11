@@ -7,8 +7,8 @@ const userRoutes = require("./controllers/routes.controllers");
 const app = express();
 
 app.use(cors());
-app.use(userRoutes);
 app.use(express.json());
+app.use(userRoutes);
 
 //mongoose connection
 const mongoose = require("mongoose");
