@@ -17,11 +17,8 @@ module.exports = {
   ],
   signUpPhoneNumber: [
     validate({
-      validator: "isNumeric",
-      message: "Must be a numbers",
-    }),
-    validate({
       validator: "isMobilePhone",
+      arguments:['any','false'],
       message: "Must be a valid phone number",
     }),
   ],

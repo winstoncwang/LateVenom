@@ -24,7 +24,6 @@ const usersSchema = new Schema({
     type: String,
     trim: true,
     required: [true, "A valid email is required"],
-    enum: ["@"],
     validate: signUpEmail,
   },
   address: {
@@ -32,7 +31,7 @@ const usersSchema = new Schema({
     trim: true,
     validate: {
       validator: (str) => {
-        return /^[a-zA-Z0-9,]$/.test(str);
+        return /^[a-zA-Z0-9, ]+$/.test(str);
       },
       message: "Please enter a valid address",
     },
