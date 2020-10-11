@@ -9,7 +9,7 @@ cleanBody = (req, res, next) => {
 };
 
 //login
-router.post("/users", cleanBody, async (req, res) => {
+router.post("/login", cleanBody, async (req, res) => {
   try {
     const result = await Users.find({ username: req.body.username });
     res.status(200).json(result);
@@ -19,7 +19,9 @@ router.post("/users", cleanBody, async (req, res) => {
 });
 
 //create account
-router.post("/users", async (req, res) => {
+router.post("/users",cleanBody,async (req, res) => {
+  console.log(req.body)
+  console.log(typeof req.body.phonenumber)
   try {
     if (Object.keys(req.body).length === 0) {
       res.status(500).json({
@@ -27,12 +29,15 @@ router.post("/users", async (req, res) => {
         Message: "Empty request body, request must be made in JSON format.",
       });
     }
-    const newUser = new Users(req.body);
+    
+    let newUser = new Users(req.body);
     const result = await newUser.save();
     res.status(200).json(result);
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+
 
 module.exports = router;
