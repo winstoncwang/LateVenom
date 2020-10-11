@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 
 class NewUserForm extends React.Component {
   constructor(props) {
@@ -16,13 +17,19 @@ class NewUserForm extends React.Component {
 
   handleInput = (e) => {
     this.setState({[e.target.name] : e.target.value})
-    console.log(e.target.name,e.target.value);
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(this.state);
-    console.log('button clicked');
+    console.log('submit button clicked.')
+    //AJAX call
+    try{
+    const data = await axios.post('http://localhost:3000/users',this.state);
+    console.log(data)
+    }catch(err){
+      console.log(err.response)
+    }
+
   };
 
   render() {
