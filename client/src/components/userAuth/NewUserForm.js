@@ -5,29 +5,36 @@ class NewUserForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
-      firstname: "",
-      lastname: "",
-      email: "",
-      address: "",
-      phonenumber: "",
-    };
+      form:{
+              username: "",
+              password: "",
+              firstname: "",
+              lastname: "",
+              email: "",
+              address: "",
+              phonenumber: "",
+            },
+      isSubmitting:false,
+      validationError:""};
   }
 
   handleInput = (e) => {
-    this.setState({[e.target.name] : e.target.value})
+    let form = {...this.state.form}
+    form[e.target.name]=e.target.value;
+    this.setState({form})
   };
 
   handleSubmit = async(e) => {
     e.preventDefault();
     console.log('submit button clicked.')
+    console.log(this.state.form)
     //AJAX call
     try{
-    const data = await axios.post('http://localhost:3000/users',this.state);
+    const data = await axios.post('http://localhost:3000/users',this.state.form);
     console.log(data)
     }catch(err){
       console.log(err.response)
+      this.setState({validationError:err.response.data})
     }
 
   };
