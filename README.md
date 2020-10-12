@@ -47,3 +47,69 @@ setup api endpoint for login and registration
 mongoose db connection
 
 ---
+
+fixed #1
+
+    update readme file
+
+---
+
+replace icons
+
+---
+
+added react/react-dom
+
+---
+
+added header component
+
+---
+
+added footer and icons
+
+---
+
+added stylesheet
+
+---
+
+added main contents
+
+---
+
+added login component and downgrade history to v4 to remove bug
+
+---
+
+added sanitization for req object and create account form
+
+---
+
+added login page and updated create account page
+
+---
+
+added submit and input change for register form
+
+---
+
+rearranged json parser and router arrangement
+
+---
+
+revisit regex string, tested using postman, needs further update
+
+---
+
+added axios calls with appropriate error handling
+
+---
+
+changed schema phonenumber type to string
+
+---
+
+axios call with response data from expressjs and proper state management
+
+---

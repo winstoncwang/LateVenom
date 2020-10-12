@@ -18,6 +18,8 @@ class NewUserForm extends React.Component {
       validationError:""};
   }
 
+  componentDidUpdate=()=>{}
+
   handleInput = (e) => {
     let form = {...this.state.form}
     form[e.target.name]=e.target.value;
@@ -30,7 +32,7 @@ class NewUserForm extends React.Component {
     console.log(this.state.form)
     //AJAX call
     try{
-    const data = await axios.post('http://localhost:3000/users',this.state.form);
+    const data = await axios.post('http://localhost:5000/users',this.state.form);
     console.log(data)
     }catch(err){
       console.log(err.response)
