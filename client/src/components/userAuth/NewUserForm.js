@@ -15,10 +15,12 @@ class NewUserForm extends React.Component {
               phonenumber: "",
             },
       isSubmitting:false,
-      validationError:""};
+      validationError:{},
+      messageOpen:false
+    };
   }
 
-  componentDidUpdate=()=>{}
+  componentDidUpdate=()=>{  }
 
   handleInput = (e) => {
     let form = {...this.state.form}
@@ -35,8 +37,11 @@ class NewUserForm extends React.Component {
     const data = await axios.post('http://localhost:5000/users',this.state.form);
     console.log(data)
     }catch(err){
-      console.log(err.response)
+      if(err.response.data){
       this.setState({validationError:err.response.data})
+      this.setState({messageOpen:true})
+      }
+      console.log(this.state.validationError,this.state.messageOpen)
     }
 
   };
@@ -56,40 +61,52 @@ class NewUserForm extends React.Component {
           <h4 className="ui dividing header">User Information</h4>
           <div className="required field">
             <label>Username</label>
-            <input type="text" name="username" placeholder="Username" onChange={this.handleInput} />
+            <input type="text" name="username" placeholder="Username" value={this.state.form.username} onChange={this.handleInput} />
+            <div className="ui pointing red basic label">
+              That name is taken!
+            </div>
           </div>
           <div className="required field">
             <label>Password</label>
-            <input type="password" name="password" placeholder="Password" onChange={this.handleInput}/>
+            <input type="password" name="password" placeholder="Password" value={this.state.form.password} onChange={this.handleInput}/>
           </div>
           <div className="required field">
             <label>First name</label>
-            <input type="text" name="firstname" placeholder="First name" onChange={this.handleInput}/>
+            <input type="text" name="firstname" placeholder="First name" value={this.state.form.firstname} onChange={this.handleInput}/>
           </div>
           <div className="required field">
             <label>Last name</label>
-            <input type="text" name="lastname" placeholder="Last name" onChange={this.handleInput}/>
+            <input type="text" name="lastname" placeholder="Last name" value={this.state.form.lastname} onChange={this.handleInput}/>
           </div>
           <div className="required field">
             <label>E-mail</label>
-            <input type="text" name="email" placeholder="E-mail" onChange={this.handleInput}/>
+            <input type="text" name="email" placeholder="E-mail" value={this.state.form.email} onChange={this.handleInput}/>
           </div>
           <div className="required field">
             <label>Address</label>
-            <input type="text" name="address" placeholder="Address" onChange={this.handleInput}/>
+            <input type="text" name="address" placeholder="Address" value={this.state.form.address} onChange={this.handleInput}/>
           </div>
           <div className="required field">
             <label>Phone number</label>
-            <input type="text" name="phonenumber" placeholder="Phone number" onChange={this.handleInput}/>
+            <input type="text" name="phonenumber" placeholder="Phone number" value={this.state.form.phonenumber} onChange={this.handleInput}/>
           </div>
-          <br></br>
-          <br></br>
-            <button className="ui button" type="submit">
-              SUBMIT
-            </button>
-            <button className="ui button" type="cancel">
-              CANCEL
-            </button>
+
+          <div className={`ui negative message ${ this.state.messageOpen ? '':'hidden'}`}>
+            <i className="close icon" onClick={()=>{this.setState({messageOpen:false});}}></i>
+            <div className="header">
+              We're sorry we can't apply that discount
+            </div>
+            <p>
+              That offer has expired
+            </p>
+          </div>
+
+          <button className="ui button" type="submit">
+            SUBMIT
+          </button>
+          <button className="ui button" type="cancel">
+            CANCEL
+          </button>
         </form>
       </div>
     );
