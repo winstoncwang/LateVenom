@@ -32,7 +32,7 @@ class NewUserForm extends React.Component {
 
   componentDidUpdate=()=>{  }
 
-  handleOnChange = (e) => {
+  handleOnChange = async(e) => {
     let form = {...this.state.form}
     form[e.target.name]=e.target.value;
     this.setState({form})
@@ -41,6 +41,7 @@ class NewUserForm extends React.Component {
     if(e.target.name==='username' && e.target.value.length>0){
       try{
         const data = await axios.get(`http://localhost:5000/users/${e.target.value}`)
+        console.log("user:",data)
         if(data){
         this.setState({userExist:true})
         }
