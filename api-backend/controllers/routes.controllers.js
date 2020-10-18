@@ -31,9 +31,7 @@ router.post("/login", cleanBody, async (req, res) => {
 
 //create account
 router.post("/users",[cleanBody,repeatedUsername],async (error,req, res) => {
-  if(error){
-    res.status(500).json(error)
-  }
+  
 
   try {
     if (Object.keys(req.body).length === 0) {
@@ -41,6 +39,9 @@ router.post("/users",[cleanBody,repeatedUsername],async (error,req, res) => {
         StatusCode: 500,
         Message: "Empty request body, request must be made in JSON format.",
       });
+    }
+    if(error){
+      res.status(500).json(error)
     }
     
     let newUser = new Users(req.body);
