@@ -48,7 +48,7 @@ class NewUserForm extends React.Component {
           this.setState({userExist:true})
 
           let validationError = {...this.state.validationError}
-          validationError.username="Username already exists, please try again";
+          validationError.username="username already exists, please try again";
           this.setState({validationError})
         }else{
           this.setState({userExist:false})

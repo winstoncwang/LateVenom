@@ -1,5 +1,5 @@
 import React from 'react';
-import {render,cleanup,screen} from '@testing-library/react'
+import {render,cleanup,screen,waitFor,waitForElement} from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 
@@ -32,11 +32,20 @@ describe('NewUserForm Testing',()=>{
     })
 
     it('Empty field dispay error message',()=>{
-        const {getByPlaceholderText,getByText}=render(<NewUserForm/>)
+        render(<NewUserForm/>)
 
         userEvent.click(screen.getByPlaceholderText(/username/i))
         userEvent.click(screen.getByText(/user information/i))
         expect(screen.getByText(/username can not be empty/i)).toBeVisible()
+    })
+
+    it('Existing user display error message',async()=>{
+        const{findByText}=render(<NewUserForm/>)
+
+        userEvent.type(screen.getByPlaceholderText(/username/i),"winstoncwang")
+        expect(await findByText('username already exists, please try again')).toBeVisible()
+        
+
     })
 
 })
