@@ -20,11 +20,6 @@
     "url": "https://github.com/winstoncwang/LateVenom/issues"
   },
   "homepage": "https://github.com/winstoncwang/LateVenom#readme",
-  "dependencies": {
-    "chai": "^4.2.0",
-    "jest": "^26.5.3",
-    "mocha": "^8.2.0"
-  },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",

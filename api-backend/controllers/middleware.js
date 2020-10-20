@@ -1,20 +1,17 @@
 const Users = require('../model/users.model')
 
 module.exports={
-
-    repeatedUsername: async(req,res,next)=>{
-        try{
+      repeatedUsername: async(req,res,next)=>{
             const existingUsername= await Users.findOne({username:req.body.username});
-            if(existingUsername){
-                throw new Error('Username already in use')
+            //no duplicated user found
+            if(existingUsername!==null){
+                res.status(500).json({error:"username already in use"})
+                next()
             }
-            else{
-                next();
-            }
-        }catch(err){
-            next(err);
-        }
-        
-    }
+            
+            next()
+          
+          }
+    
 
 }
