@@ -7,7 +7,6 @@ const {repeatedUsername} = require('./middleware')
 
 cleanBody = (req, res, next) => {
   req.body = sanitize(req.body);
-  console.log("cleanbody passed")
   next();
 };
 

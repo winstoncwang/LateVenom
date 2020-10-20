@@ -44,7 +44,6 @@ class NewUserForm extends React.Component {
       try{
         const data = await axios.get(`http://localhost:5000/users/${e.target.value}`)
         
-        console.log(data.data)
         if(data.data.length!==0){
           this.setState({userExist:true})
 
@@ -59,7 +58,7 @@ class NewUserForm extends React.Component {
           this.setState({validationError})
         }
       }catch(err){
-        console.log('networkcheck: ',err.message==="Network Error")
+        console.log('Network Error Server is down: ',err.message==="Network Error")
         if(err.message==="Network Error"){
           history.push('/errors')
         }
