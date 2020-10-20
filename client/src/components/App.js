@@ -9,6 +9,7 @@ import Contents from "./contents/Contents";
 import LogInForm from "./userAuth/LogInForm";
 import NewUserForm from "./userAuth/NewUserForm";
 import history from "../history";
+import ErrorPage from '../components/userAuth/ErrorPage'
 const App = () => {
   return (
     <div className="ui">
@@ -19,6 +20,7 @@ const App = () => {
           <Route exact path="/" component={Contents} />
           <Route exact path="/login" component={LogInForm} />
           <Route exact path="/users" component={NewUserForm} />
+          <Route exact path="/errors" component={ErrorPage} />
           <Footer />
         </div>
       </Router>

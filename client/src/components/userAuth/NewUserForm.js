@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import history from '../../history'
 import InputError from './InputError'
 
 class NewUserForm extends React.Component {
@@ -58,7 +59,10 @@ class NewUserForm extends React.Component {
           this.setState({validationError})
         }
       }catch(err){
-        console.log(err)
+        console.log('networkcheck: ',err.message==="Network Error")
+        if(err.message==="Network Error"){
+          history.push('/errors')
+        }
       }
     }
   };
