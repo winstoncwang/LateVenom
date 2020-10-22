@@ -43,7 +43,7 @@ describe('NewUserForm Testing',()=>{
         const{findByText}=render(<NewUserForm/>)
 
         userEvent.type(screen.getByPlaceholderText(/username/i),"winstoncwang")
-        expect(await findByText('username already exists, please try again')).toBeVisible()
+        expect(await findByText('username already exists')).toBeVisible()
         
 
     })

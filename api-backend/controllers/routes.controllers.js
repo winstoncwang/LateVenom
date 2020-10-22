@@ -10,9 +10,6 @@ cleanBody = (req, res, next) => {
   next();
 };
 
-
-
-
 router.get('/users/:username',cleanBody,async(req,res)=>{
   console.log(req.params.username)
     try{

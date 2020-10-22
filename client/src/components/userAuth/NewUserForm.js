@@ -27,11 +27,10 @@ class NewUserForm extends React.Component {
         phonenumber: "",
       },
       messageOpen:false,
+      positiveMessage:false,
       userExist:false
     };
   }
-
-  componentDidUpdate=()=>{  }
 
   handleOnChange = async(e) => {
     let form = {...this.state.form}
@@ -48,7 +47,7 @@ class NewUserForm extends React.Component {
           this.setState({userExist:true})
 
           let validationError = {...this.state.validationError}
-          validationError.username="username already exists, please try again";
+          validationError.username="username already exists";
           this.setState({validationError})
         }else{
           this.setState({userExist:false})
@@ -84,17 +83,71 @@ class NewUserForm extends React.Component {
 
   handleOnSubmit = async(e) => {
     e.preventDefault();
-    //AJAX call
+    
+    //check for all input fields and possible error before submit
+    const noInputError = Object.values(this.state.validationError).every((val)=>(val===""))
+    const noEmptyInput = Object.values(this.state.form).every((val)=>(val!==""))
 
-    try{
-    const data = await axios.post('http://localhost:5000/users',this.state.form);
-    console.log("data: ",data)
-    }catch(err){
-      if(err.response.data){
-      this.setState({validationError:err.response.data})
-      this.setState({messageOpen:true})
+    let validationError = {...this.state.validationError}
+    Object.entries(this.state.form).forEach(([key,value])=>{
+      if(value.length===0){
+        validationError[key]=`${key} can not be empty`
+        this.setState({validationError},()=>{
+          console.log("validation error added")
+        })
+      }else{
+        if(!this.state.userExist){
+        //let validationError// = {...this.state.validationError}
+        validationError[key]="";
+        this.setState({validationError})
+        }
       }
-      console.log(err,this.state.validationError,this.state.messageOpen)
+    })
+
+    console.log(this.state.validationError)
+    console.log('UserExist: ',this.state.userExist,'noInputError: ',noInputError,"noEmptyInput: ",noEmptyInput )
+
+    if(!this.state.userExist && noInputError && noEmptyInput){
+      //AJAX call
+      try{
+      const data = await axios.post('http://localhost:5000/users',this.state.form);
+      console.log("data: ",data)
+      let validationError = {...this.state.validationError}
+      if(data.data.errors){
+        console.log(data.data.errors)
+        for(let key in data.data.errors){
+          console.log(data.data.errors[key])
+          validationError[key]=data.data.errors[key].message
+          this.setState({validationError})
+          this.setState({messageOpen:true})
+        }
+      }else{
+        this.setState(
+          {
+            form:{
+            username: "",
+            password: "",
+            firstname: "",
+            lastname: "",
+            email: "",
+            address: "",
+            phonenumber: "",
+            }
+          })
+        this.setState({messageOpen:false})
+        this.setState({positiveMessage:true})
+      }
+      
+      }catch(err){
+        console.log(err)
+        if(err.response.data){
+        this.setState({validationError:err.response.data})
+        this.setState({messageOpen:true})
+        }
+        console.log(err,this.state.validationError,this.state.messageOpen)
+      }
+    }else{
+      this.setState({messageOpen:true})
     }
 
   };
@@ -103,7 +156,13 @@ class NewUserForm extends React.Component {
     return (
       <div className="main ui container" style={{ width: "70%" }}>
         <h2 className="ui left aligned blue header">Create an account</h2>
-        <br></br>
+        <div data-testid="success-message" className={`ui success message ${this.state.positiveMessage? '':'hidden'}`}>
+            <i className="close icon" onClick={()=>{this.setState({positiveMessage:false})}}></i>
+            <div className="header">
+              Your user registration was successful.
+            </div>
+            <p>You may now log-in with the username you have chosen</p>
+        </div>
         <div data-testid="error-message" className={`ui negative message ${ this.state.messageOpen ? '':'hidden'}`}>
             <i className="close icon" onClick={()=>{this.setState({messageOpen:false});}}></i>
             <div className="header">
@@ -125,32 +184,32 @@ class NewUserForm extends React.Component {
             <input id="username" type="text" name="username" placeholder="Username" value={this.state.form.username} onChange={this.handleOnChange} onBlur={this.handleOnBlur} />
             <InputError error={this.state.validationError.username}/>
           </div>
-          <div className="required field">
+          <div className={`required field input ${this.state.validationError.password.length? "error":""}`}>
             <label htmlFor="password">Password</label>
             <input id="password" type="password" name="password" placeholder="Password" value={this.state.form.password} onChange={this.handleOnChange} onBlur={this.handleOnBlur}/>
             <InputError error={this.state.validationError.password}/>
           </div>
-          <div className="required field">
+          <div className={`required field input ${this.state.validationError.firstname.length? "error":""}`}>
             <label htmlFor="firstname">First name</label>
             <input id="firstname" type="text" name="firstname" placeholder="First name" value={this.state.form.firstname} onChange={this.handleOnChange} onBlur={this.handleOnBlur}/>
             <InputError error={this.state.validationError.firstname}/>
           </div>
-          <div className="required field">
+          <div className={`required field input ${this.state.validationError.lastname.length? "error":""}`}>
             <label htmlFor="lastname">Last name</label>
             <input id="lastname" type="text" name="lastname" placeholder="Last name" value={this.state.form.lastname} onChange={this.handleOnChange} onBlur={this.handleOnBlur}/>
             <InputError error={this.state.validationError.lastname}/>
           </div>
-          <div className="required field">
+          <div className={`required field input ${this.state.validationError.email.length? "error":""}`}>
             <label htmlFor="email">E-mail</label>
             <input id="email" type="text" name="email" placeholder="E-mail" value={this.state.form.email} onChange={this.handleOnChange} onBlur={this.handleOnBlur}/>
             <InputError error={this.state.validationError.email}/>
           </div>
-          <div className="required field">
+          <div className={`required field input ${this.state.validationError.address.length? "error":""}`}>
             <label htmlFor="address">Address</label>
             <input id="address" type="text" name="address" placeholder="Address" value={this.state.form.address} onChange={this.handleOnChange} onBlur={this.handleOnBlur}/>
             <InputError error={this.state.validationError.address}/>
           </div>
-          <div className="required field">
+          <div className={`required field input ${this.state.validationError.phonenumber.length? "error":""}`}>
             <label htmlFor="phonenumber">Phone number</label>
             <input id="phonenumber" type="text" name="phonenumber" placeholder="Phone number" value={this.state.form.phonenumber} onChange={this.handleOnChange} onBlur={this.handleOnBlur}/>
             <InputError error={this.state.validationError.phonenumber}/>
@@ -159,7 +218,7 @@ class NewUserForm extends React.Component {
           <button className="ui button" type="submit">
             SUBMIT
           </button>
-          <button className="ui button" type="cancel">
+          <button className="ui button" type="cancel" >
             CANCEL
           </button>
         </form>

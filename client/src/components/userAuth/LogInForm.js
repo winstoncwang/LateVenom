@@ -16,11 +16,11 @@ class LogInForm extends React.Component {
           <br></br>
           <div className="field">
             <label>Username</label>
-            <input type="text" name="username" placeHolder="Username" />
+            <input type="text" name="username" placeholder="Username" />
           </div>
           <div className="field">
             <label>Password</label>
-            <input type="password" name="password" placeHolder="password" />
+            <input type="password" name="password" placeholder="password" />
           </div>
           <br></br>
           <div className="buttons">

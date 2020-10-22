@@ -24,7 +24,7 @@ describe('InputError Component Tests',()=>{
 
     })
 
-    it('Message display with',()=>{
+    it('Message display with error',()=>{
         const validationError={
             username:"username is required"
         }
